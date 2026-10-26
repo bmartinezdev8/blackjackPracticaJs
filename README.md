@@ -18,7 +18,7 @@ Valores de las cartas: las figuras (J, Q, K) valen 10, el As vale [11 u otro val
 ## Tecnologías
 
 - HTML5
-- CSS3 y Bootstrap (para el diseño de los botones y la distribución)
+- CSS3 y Bootstrap
 - JavaScript (sin frameworks)
 - Underscore.js (para barajar el mazo)
 
@@ -26,8 +26,10 @@ Valores de las cartas: las figuras (J, Q, K) valen 10, el As vale [11 u otro val
 
 - Manipulación del DOM: crear y agregar elementos (las cartas) y actualizar el puntaje en pantalla.
 - Eventos: botones con `addEventListener`.
-- Funciones, arreglos y control de flujo para armar el mazo, repartir cartas y calcular puntos.
-- Organización de un proyecto pequeño en archivos separados (HTML, CSS y JS).
+- Patrón módulo: el código está dentro de una función autoejecutable (IIFE) con `'use strict'`, que evita variables globales y expone solo lo necesario (`miModulo.nuevoJuego`).
+- Refactorización en funciones pequeñas (`crearDeck`, `pedirCarta`, `valorCarta`, `crearCarta`, `acumularPuntos`, `turnoComputadora` y `determinarGanador`).
+- Puntajes guardados en un arreglo por jugador, lo que deja preparado el juego para más de dos participantes.
+- Minificación del script para el uso en producción.
 
 ## Estructura del proyecto
 
@@ -38,7 +40,8 @@ blackjack/
     ├── css/
     │   └── style.css
     ├── js/
-    │   ├── app.js
+    │   ├── app.js          # código fuente
+    │   ├── app.min.js      # versión minificada que carga el HTML
     │   └── underscore.js
     └── cartas/
 ```
@@ -50,6 +53,10 @@ No necesita instalación. Descarga o clona el repositorio y abre `index.html` en
 ```bash
 git clone https://github.com/bmartinezdev8/blackjackPracticaJs.git
 ```
+
+## Desarrollo
+
+El `index.html` carga `assets/js/app.min.js`. Si modificas `app.js`, hay que volver a generar la versión minificada para que los cambios se vean en el juego.
 
 ## Mejoras pendientes
 
