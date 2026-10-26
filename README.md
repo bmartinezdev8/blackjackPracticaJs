@@ -60,10 +60,10 @@ El `index.html` carga `assets/js/app.min.js`. Si modificas `app.js`, hay que vol
 
 ## Mejoras pendientes
 
-- [ ] [Agregar apuestas con fichas]
-- [ ] [Guardar el puntaje o el historial de partidas]
-- [ ] [Mostrar un mensaje claro de quién ganó]
-- [ ] [Hacer el diseño responsive para celular]
+- [ ] Reiniciar bien los puntajes al empezar un nuevo juego
+- [ ] Mostrar el resultado cuando la computadora gana por puntos sin pasarse
+- [ ] Guardar el historial de partidas con `localStorage`
+- [ ] Hacer el diseño responsive para celular
 
 ## Créditos
 
