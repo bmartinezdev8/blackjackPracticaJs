@@ -1,16 +1,18 @@
-html, body{
+html, body {
     margin: 0px;
     background-color: #2F4F30;
     color: white;
 }
 
+
 .titulo {
     text-align: center;
-    background-color:  black;
+    background-color: black;
     color: white;
     padding: 20px;
     font-size: 25px;
 }
+
 .carta {
     position: relative;
     width: 150px;
@@ -18,6 +20,6 @@ html, body{
     margin-left: -75px;
 }
 
-#cruppier-cartas, #jugador-cartas{
+#computadora-cartas, #jugador-cartas {
     height: 240px;
 }
