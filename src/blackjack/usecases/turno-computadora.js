@@ -1,6 +1,7 @@
 import { crearCartaHTML } from './crear-carta-html.js';
 import { pedirCarta } from './pedir-carta.js';
 import { valorCarta } from './valor-carta.js';
+import { determinarGanador } from './determinar-ganador.js';
 
 /**
  * Turno de la computadora
@@ -32,14 +33,6 @@ export const turnoComputadora = ( puntosMinimos, puntosHTML, divCartasComputador
     } while ( (puntosComputadora < puntosMinimos) && (puntosMinimos <= 21) );
 
     setTimeout(() => {
-        if ( puntosComputadora === puntosMinimos ) {
-            alert('Nadie gana :(');
-        } else if ( puntosMinimos > 21 ) {
-            alert('Computadora gana');
-        } else if ( puntosComputadora > 21 ) {
-            alert('Jugador Gana');
-        } else {
-            alert('Computadora Gana');
-        }
+        alert( determinarGanador( puntosMinimos, puntosComputadora ) );
     }, 100 );
 };

@@ -1,5 +1,6 @@
-export {crearDeck} from './crear-deck.js';
-export { pedirCarta } from './pedir-carta.js';
-export { valorCarta } from './valor-carta.js';
-export { turnoComputadora } from './turno-computadora.js'
-export { crearCartaHTML } from './crear-carta-html.js'
+export * from './crear-carta-html.js';
+export * from './crear-deck.js';
+export * from './determinar-ganador.js';
+export * from './pedir-carta.js';
+export * from './turno-computadora.js';
+export * from './valor-carta.js';
