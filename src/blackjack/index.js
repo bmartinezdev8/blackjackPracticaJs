@@ -1,94 +1,76 @@
-import _ from 'underscore';
-//import { crearDeck as crearNuevoDeck } from './usecases/crear-deck';
-import { crearDeck, pedirCarta, valorCarta, turnoComputadora, crearCartaHTML  } from './usecases';
+import { crearDeck, pedirCarta, valorCarta, turnoComputadora, crearCartaHTML, BLACKJACK  } from './usecases/index.js';
+
 
 /**
- * 2C = Two of Clubs
- * 2D = Two of Diamonds
- * 2H = Two of Hearts
- * 2S = Two of Spades
+ * Inicia el juego de blackjack: crea el deck y registra los eventos de los botones
  */
+export const iniciarJuego = () => {
 
-export let deck         = [];
-const tipos      = ['C','D','H','S'];
-const especiales = ['A','J','Q','K'];
-
-export let puntosJugador = 0,
-    puntosComputadora = 0;
-
-// Referencias del HTML
-export const btnPedir   = document.querySelector('#btnPedir');
-export const btnDetener = document.querySelector('#btnDetener');
-const btnNuevo   = document.querySelector('#btnNuevo');
-
-export const divCartasJugador     = document.querySelector('#jugador-cartas');
-const divCartasComputadora = document.querySelector('#computadora-cartas');
-
-export const puntosHTML = document.querySelectorAll('small');
+    const tipos      = ['C','D','H','S'];
+    const especiales = ['A','J','Q','K'];
+    let deck = crearDeck( tipos, especiales );
 
 
+    let puntosJugador = 0;
 
-deck = crearDeck( tipos, especiales );
+    // Referencias del HTML
+    const btnPedir   = document.querySelector('#btnPedir');
+    const btnDetener = document.querySelector('#btnDetener');
+    const btnNuevo   = document.querySelector('#btnNuevo');
 
+    const divCartasJugador     = document.querySelector('#jugador-cartas');
+    const divCartasComputadora = document.querySelector('#computadora-cartas');
 
-
-
-
-
-
-
-
-// Eventos
-btnPedir.addEventListener('click', () => {
-
-    const carta = pedirCarta( deck );
+    const [  puntosJugadorHTML, puntosComputadoraHTML ] = document.querySelectorAll('small');
     
-    puntosJugador = puntosJugador + valorCarta( carta );
-    puntosHTML[0].innerText = puntosJugador;
-    
-    // <img class="carta" src="assets/cartas/2C.png">
-    const imgCarta = crearCartaHTML(carta);
-    divCartasJugador.append( imgCarta );
-
-    if ( puntosJugador > 21 ) {
-        console.warn('Lo siento mucho, perdiste');
+    const terminarTurnoJugador = () => {
         btnPedir.disabled   = true;
         btnDetener.disabled = true;
-        turnoComputadora( puntosJugador, puntosHTML[1], divCartasComputadora, deck );
-
-    } else if ( puntosJugador === 21 ) {
-        console.warn('21, genial!');
-        btnPedir.disabled   = true;
-        btnDetener.disabled = true;
-        turnoComputadora( puntosJugador, puntosHTML[1], divCartasComputadora, deck );
-    }
-
-});
+        turnoComputadora( puntosJugador, puntosComputadoraHTML, divCartasComputadora, deck );
+    };
 
 
-btnDetener.addEventListener('click', () => {
-    btnPedir.disabled   = true;
-    btnDetener.disabled = true;
+    // Eventos
+    btnPedir.addEventListener('click', () => {
 
-    turnoComputadora( puntosJugador, puntosHTML[1], divCartasComputadora, deck );
-});
+        const carta = pedirCarta( deck );
+        
+        puntosJugador = puntosJugador + valorCarta( carta );
+        puntosJugadorHTML.innerText = puntosJugador;
+        
+        // <img class="carta" src="assets/cartas/2C.png">
+        const imgCarta = crearCartaHTML(carta);
+        divCartasJugador.append( imgCarta );
 
-btnNuevo.addEventListener('click', () => {
+        if ( puntosJugador > BLACKJACK ) {
+            console.warn('Lo siento mucho, perdiste');
+            terminarTurnoJugador();
 
-    console.clear();
-    deck = [];
-    deck = crearDeck(tipos,especiales);
+        } else if ( puntosJugador === BLACKJACK ) {
+            console.warn('¡21, genial!');
+            terminarTurnoJugador();
+        }
 
-    puntosJugador     = 0;
-    puntosComputadora = 0;
-    
-    puntosHTML[0].innerText = 0;
-    puntosHTML[1].innerText = 0;
+    });
 
-    divCartasComputadora.innerHTML = '';
-    divCartasJugador.innerHTML = '';
 
-    btnPedir.disabled   = false;
-    btnDetener.disabled = false;
+    btnDetener.addEventListener('click', terminarTurnoJugador);
 
-});
+    btnNuevo.addEventListener('click', () => {
+
+        console.clear();
+        deck = crearDeck(tipos,especiales);
+
+        puntosJugador     = 0;
+        
+        puntosJugadorHTML.innerText     = 0;
+        puntosComputadoraHTML.innerText = 0;
+
+        divCartasComputadora.innerHTML = '';
+        divCartasJugador.innerHTML = '';
+
+        btnPedir.disabled   = false;
+        btnDetener.disabled = false;
+
+    });
+};
