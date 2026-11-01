@@ -1,6 +1,8 @@
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
-    base: '/blackjack-vite/',
-    plugins: []
+    base: '/blackjackPracticaJs/',
+    build: {
+        outDir: 'docs'
+    }
 });
