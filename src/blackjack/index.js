@@ -1,81 +1,76 @@
-import { crearDeck, pedirCarta, valorCarta, turnoComputadora, crearCartaHTML, BLACKJACK  } from './usecases';
+import { crearDeck, pedirCarta, valorCarta, turnoComputadora, crearCartaHTML, BLACKJACK  } from './usecases/index.js';
 
 
 /**
- * 2C = Two of Clubs
- * 2D = Two of Diamonds
- * 2H = Two of Hearts
- * 2S = Two of Spades
+ * Inicia el juego de blackjack: crea el deck y registra los eventos de los botones
  */
+export const iniciarJuego = () => {
 
-const tipos      = ['C','D','H','S'];
-const especiales = ['A','J','Q','K'];
-let deck = crearDeck( tipos, especiales );
-
-
-let puntosJugador = 0;
-
-// Referencias del HTML
-const btnPedir   = document.querySelector('#btnPedir');
-const btnDetener = document.querySelector('#btnDetener');
-const btnNuevo   = document.querySelector('#btnNuevo');
-
-const divCartasJugador     = document.querySelector('#jugador-cartas');
-const divCartasComputadora = document.querySelector('#computadora-cartas');
-
-const [  puntosJugadorHTML, puntosComputadoraHTML ] = document.querySelectorAll('small');
+    const tipos      = ['C','D','H','S'];
+    const especiales = ['A','J','Q','K'];
+    let deck = crearDeck( tipos, especiales );
 
 
+    let puntosJugador = 0;
 
-// Eventos
-btnPedir.addEventListener('click', () => {
+    // Referencias del HTML
+    const btnPedir   = document.querySelector('#btnPedir');
+    const btnDetener = document.querySelector('#btnDetener');
+    const btnNuevo   = document.querySelector('#btnNuevo');
 
-    const carta = pedirCarta( deck );
+    const divCartasJugador     = document.querySelector('#jugador-cartas');
+    const divCartasComputadora = document.querySelector('#computadora-cartas');
+
+    const [  puntosJugadorHTML, puntosComputadoraHTML ] = document.querySelectorAll('small');
     
-    puntosJugador = puntosJugador + valorCarta( carta );
-    puntosJugadorHTML.innerText = puntosJugador;
-    
-    // <img class="carta" src="assets/cartas/2C.png">
-    const imgCarta = crearCartaHTML(carta);
-    divCartasJugador.append( imgCarta );
-
-    if ( puntosJugador > BLACKJACK ) {
-        console.warn('Lo siento mucho, perdiste');
+    const terminarTurnoJugador = () => {
         btnPedir.disabled   = true;
         btnDetener.disabled = true;
         turnoComputadora( puntosJugador, puntosComputadoraHTML, divCartasComputadora, deck );
-
-    } else if ( puntosJugador === BLACKJACK ) {
-        console.warn('¡21, genial!');
-        btnPedir.disabled   = true;
-        btnDetener.disabled = true;
-        turnoComputadora( puntosJugador, puntosComputadoraHTML, divCartasComputadora, deck );
-    }
-
-});
+    };
 
 
-btnDetener.addEventListener('click', () => {
-    btnPedir.disabled   = true;
-    btnDetener.disabled = true;
+    // Eventos
+    btnPedir.addEventListener('click', () => {
 
-    turnoComputadora( puntosJugador, puntosComputadoraHTML, divCartasComputadora, deck );
-});
+        const carta = pedirCarta( deck );
+        
+        puntosJugador = puntosJugador + valorCarta( carta );
+        puntosJugadorHTML.innerText = puntosJugador;
+        
+        // <img class="carta" src="assets/cartas/2C.png">
+        const imgCarta = crearCartaHTML(carta);
+        divCartasJugador.append( imgCarta );
 
-btnNuevo.addEventListener('click', () => {
+        if ( puntosJugador > BLACKJACK ) {
+            console.warn('Lo siento mucho, perdiste');
+            terminarTurnoJugador();
 
-    console.clear();
-    deck = crearDeck(tipos,especiales);
+        } else if ( puntosJugador === BLACKJACK ) {
+            console.warn('¡21, genial!');
+            terminarTurnoJugador();
+        }
 
-    puntosJugador     = 0;
-    
-    puntosJugadorHTML.innerText     = 0;
-    puntosComputadoraHTML.innerText = 0;
+    });
 
-    divCartasComputadora.innerHTML = '';
-    divCartasJugador.innerHTML = '';
 
-    btnPedir.disabled   = false;
-    btnDetener.disabled = false;
+    btnDetener.addEventListener('click', terminarTurnoJugador);
 
-});
+    btnNuevo.addEventListener('click', () => {
+
+        console.clear();
+        deck = crearDeck(tipos,especiales);
+
+        puntosJugador     = 0;
+        
+        puntosJugadorHTML.innerText     = 0;
+        puntosComputadoraHTML.innerText = 0;
+
+        divCartasComputadora.innerHTML = '';
+        divCartasJugador.innerHTML = '';
+
+        btnPedir.disabled   = false;
+        btnDetener.disabled = false;
+
+    });
+};
