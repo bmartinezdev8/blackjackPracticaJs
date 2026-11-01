@@ -1,4 +1,4 @@
-import { crearDeck, pedirCarta, valorCarta, turnoComputadora, crearCartaHTML  } from './usecases';
+import { crearDeck, pedirCarta, valorCarta, turnoComputadora, crearCartaHTML, BLACKJACK  } from './usecases';
 
 
 /**
@@ -39,14 +39,14 @@ btnPedir.addEventListener('click', () => {
     const imgCarta = crearCartaHTML(carta);
     divCartasJugador.append( imgCarta );
 
-    if ( puntosJugador > 21 ) {
+    if ( puntosJugador > BLACKJACK ) {
         console.warn('Lo siento mucho, perdiste');
         btnPedir.disabled   = true;
         btnDetener.disabled = true;
         turnoComputadora( puntosJugador, puntosComputadoraHTML, divCartasComputadora, deck );
 
-    } else if ( puntosJugador === 21 ) {
-        console.warn('21, genial!');
+    } else if ( puntosJugador === BLACKJACK ) {
+        console.warn('¡21, genial!');
         btnPedir.disabled   = true;
         btnDetener.disabled = true;
         turnoComputadora( puntosJugador, puntosComputadoraHTML, divCartasComputadora, deck );

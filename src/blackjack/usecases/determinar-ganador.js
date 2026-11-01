@@ -1,3 +1,5 @@
+import { BLACKJACK } from "./constantes.js";
+
 /**
  * Determina al ganador de la partida
  * @param {Number} puntosJugador Puntos finales del jugador
@@ -6,7 +8,7 @@
  */
 export const determinarGanador = (puntosJugador, puntosComputadora) =>{
     if (puntosJugador === puntosComputadora ) return 'Nadie gana (˶˃⤙˂˶)';
-    if (puntosJugador > 21 ) return 'Gana la computadora (╥﹏╥)';
-    if (puntosComputadora > 21) return 'Jugador gana felicidades (,,> ᴗ <,,)';
+    if (puntosJugador > BLACKJACK ) return 'Gana la computadora (╥﹏╥)';
+    if (puntosComputadora > BLACKJACK) return 'Jugador gana felicidades (,,> ᴗ <,,)';
     return 'Computadora gana (⋟﹏⋞)';
 }
