@@ -16,9 +16,9 @@ html, body {
 
 .titulo h1 {
     color: #f1cb74;
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
-    letter-spacing: 4px;
+    letter-spacing: 2px;
     margin-bottom: 5px;
 }
 
@@ -81,6 +81,7 @@ main section small {
     padding-left: 12px;
     box-sizing: border-box;
     max-width: 100%;
+    overflow-x: auto;
 }
 
 
@@ -219,5 +220,17 @@ main section small {
 
     .carta:hover {
         transform: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .resumen-estadisticas {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .resumen-estadisticas {
+        grid-template-columns: 1fr;
     }
 }

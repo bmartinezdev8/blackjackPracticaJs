@@ -34,18 +34,26 @@ export const mostrarEstadisticas = () => {
     }
 
 
-    [...historial].reverse().forEach((partida) => {
+    [...historial].reverse().forEach(partida => {
 
     const fila = document.createElement('tr');
 
-    fila.innerHTML = `
-        <td>${partida.fecha}</td>
-        <td>${partida.puntosJugador}</td>
-        <td>${partida.puntosComputadora}</td>
-        <td>${partida.resultado}</td>
-    `;
+    const datos = [
+        partida.fecha,
+        partida.puntosJugador,
+        partida.puntosComputadora,
+        partida.resultado
+    ];
+
+    datos.forEach(dato => {
+
+        const celda = document.createElement('td');
+
+        celda.textContent = dato;
+
+        fila.append(celda);
+    });
 
     tablaHistorial.append(fila);
-
 });
-};
+}

@@ -25,7 +25,8 @@ export const iniciarJuego = () => {
     const divCartasJugador     = document.querySelector('#jugador-cartas');
     const divCartasComputadora = document.querySelector('#computadora-cartas');
 
-    const [  puntosJugadorHTML, puntosComputadoraHTML ] = document.querySelectorAll('small');
+    const puntosJugadorHTML = document.querySelector('#puntos-jugador');
+    const puntosComputadoraHTML = document.querySelector('#puntos-computadora');
     
     const terminarTurnoJugador = () => {
 

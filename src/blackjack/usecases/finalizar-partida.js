@@ -3,16 +3,12 @@ import { guardarPartida } from './guardar-partida.js';
 import { mostrarEstadisticas } from './mostrar-estadisticas.js';
 
 /**
- * Finaliza una partida, guarda el resultado y muestra el ganador.
- * @param {Number} puntosJugador Puntos finales del jugador
- * @param {Number} puntosComputadora Puntos finales de la computadora
+ * Finaliza una partida, registra su resultado y actualiza las estadísticas.
+ * @param {number} puntosJugador - Puntuación final del jugador.
+ * @param {number} puntosComputadora - Puntuación final de la computadora.
  */
 export const finalizarPartida = (puntosJugador, puntosComputadora) => {
-
-    const { resultado, mensaje } = determinarGanador(
-        puntosJugador,
-        puntosComputadora
-    );
+    const { resultado, mensaje } = determinarGanador(puntosJugador, puntosComputadora);
 
     guardarPartida({
         fecha: new Date().toLocaleString('es-CL'),
@@ -21,10 +17,13 @@ export const finalizarPartida = (puntosJugador, puntosComputadora) => {
         resultado
     });
 
-    mostrarEstadisticas();
+    try {
+        mostrarEstadisticas();
+    } catch (error) {
+        console.error('No se pudieron actualizar las estadísticas:', error);
+    }
 
     setTimeout(() => {
         alert(mensaje);
     }, 100);
-
 };
