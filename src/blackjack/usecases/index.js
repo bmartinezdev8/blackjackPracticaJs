@@ -6,3 +6,7 @@ export * from './pedir-carta.js';
 export * from './turno-computadora.js';
 export * from './valor-carta.js';
 export * from './calcular-puntos.js';
+export * from './obtener-historial.js'
+export * from './limpiar-historial.js'
+export * from './calcular-estadisticas.js'
+export * from './finalizar-partida.js'

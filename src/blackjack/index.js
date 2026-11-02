@@ -12,6 +12,7 @@ export const iniciarJuego = () => {
 
     let manoJugador = [];
     let puntosJugador = 0;
+    let partidaFinalizada = false;
 
     // Referencias del HTML
     const btnPedir   = document.querySelector('#btnPedir');
@@ -24,9 +25,20 @@ export const iniciarJuego = () => {
     const [  puntosJugadorHTML, puntosComputadoraHTML ] = document.querySelectorAll('small');
     
     const terminarTurnoJugador = () => {
-        btnPedir.disabled   = true;
+
+        if (partidaFinalizada) return;
+
+        partidaFinalizada = true;
+
+        btnPedir.disabled = true;
         btnDetener.disabled = true;
-        turnoComputadora( puntosJugador, puntosComputadoraHTML, divCartasComputadora, deck );
+
+        turnoComputadora(
+            puntosJugador,
+            puntosComputadoraHTML,
+            divCartasComputadora,
+            deck
+        );
     };
 
 
@@ -64,6 +76,7 @@ export const iniciarJuego = () => {
 
         manoJugador = [];
         puntosJugador     = 0;
+        partidaFinalizada = false;
         
         puntosJugadorHTML.innerText     = 0;
         puntosComputadoraHTML.innerText = 0;

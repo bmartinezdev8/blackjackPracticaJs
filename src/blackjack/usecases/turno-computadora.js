@@ -1,8 +1,8 @@
 import { crearCartaHTML } from './crear-carta-html.js';
 import { pedirCarta } from './pedir-carta.js';
 import { calcularPuntos } from './calcular-puntos.js';
-import { determinarGanador } from './determinar-ganador.js';
 import { BLACKJACK } from './constantes.js';
+import { finalizarPartida } from './finalizar-partida.js'
 
 /**
  * Turno de la computadora
@@ -20,10 +20,8 @@ export const turnoComputadora = ( puntosMinimos, puntosHTML, divCartasComputador
     let manoComputadora = [];
 
     if (puntosMinimos > BLACKJACK) {
-    setTimeout(() => {
-        alert(determinarGanador(puntosMinimos, puntosComputadora));
-    }, 100);
-    return;
+        finalizarPartida(puntosMinimos, puntosComputadora);
+        return;
     } 
     
     do {
@@ -36,9 +34,7 @@ export const turnoComputadora = ( puntosMinimos, puntosHTML, divCartasComputador
         const imgCarta = crearCartaHTML(carta);
         divCartasComputadora.append( imgCarta );
 
-    } while ( (puntosComputadora < puntosMinimos) && (puntosMinimos <= BLACKJACK) );
+    } while ( (puntosComputadora < puntosMinimos) && (puntosMinimos < BLACKJACK) );
 
-    setTimeout(() => {
-        alert( determinarGanador( puntosMinimos, puntosComputadora ) );
-    }, 100 );
+        finalizarPartida(puntosMinimos, puntosComputadora);
 };
