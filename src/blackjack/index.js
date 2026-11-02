@@ -1,4 +1,4 @@
-import { crearDeck, pedirCarta, turnoComputadora, crearCartaHTML, BLACKJACK, calcularPuntos  } from './usecases/index.js';
+import { crearDeck, pedirCarta, turnoComputadora, crearCartaHTML, BLACKJACK, calcularPuntos, mostrarEstadisticas, limpiarHistorial  } from './usecases/index.js';
 
 
 /**
@@ -14,10 +14,13 @@ export const iniciarJuego = () => {
     let puntosJugador = 0;
     let partidaFinalizada = false;
 
+    mostrarEstadisticas();
+
     // Referencias del HTML
     const btnPedir   = document.querySelector('#btnPedir');
     const btnDetener = document.querySelector('#btnDetener');
     const btnNuevo   = document.querySelector('#btnNuevo');
+    const btnLimpiarHistorial = document.querySelector('#btnLimpiarHistorial');
 
     const divCartasJugador     = document.querySelector('#jugador-cartas');
     const divCartasComputadora = document.querySelector('#computadora-cartas');
@@ -88,4 +91,20 @@ export const iniciarJuego = () => {
         btnDetener.disabled = false;
 
     });
+    
+    btnLimpiarHistorial.addEventListener('click', () => {
+
+        const confirmar = window.confirm(
+            '¿Estás seguro de que deseas borrar todo tu historial? (￣□￣)\n\n' +
+            'Se eliminarán permanentemente las partidas guardadas y tus estadísticas volverán a cero. O﹏o\n\n' +
+            'Esta acción no se puede deshacer. ⊙﹏⊙'
+        );
+
+        if (!confirmar) return;
+
+        limpiarHistorial();
+        mostrarEstadisticas();
+
+    });
+
 };

@@ -1,5 +1,6 @@
 import { determinarGanador } from './determinar-ganador.js';
 import { guardarPartida } from './guardar-partida.js';
+import { mostrarEstadisticas } from './mostrar-estadisticas.js';
 
 /**
  * Finaliza una partida, guarda el resultado y muestra el ganador.
@@ -19,6 +20,8 @@ export const finalizarPartida = (puntosJugador, puntosComputadora) => {
         puntosComputadora,
         resultado
     });
+
+    mostrarEstadisticas();
 
     setTimeout(() => {
         alert(mensaje);

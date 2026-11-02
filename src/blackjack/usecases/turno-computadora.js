@@ -34,7 +34,7 @@ export const turnoComputadora = ( puntosMinimos, puntosHTML, divCartasComputador
         const imgCarta = crearCartaHTML(carta);
         divCartasComputadora.append( imgCarta );
 
-    } while ( (puntosComputadora < puntosMinimos) && (puntosMinimos < BLACKJACK) );
+    } while (puntosComputadora < puntosMinimos && puntosComputadora < BLACKJACK);
 
         finalizarPartida(puntosMinimos, puntosComputadora);
 };

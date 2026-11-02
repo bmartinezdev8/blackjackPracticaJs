@@ -16,12 +16,112 @@ html, body {
 }
 
 
+
+/* Mesa de juego */
+.panel-juego {
+    position: relative;
+    background-color: #25442b;
+    border: 2px solid #577a54;
+    border-radius: 16px;
+    padding: 20px;
+    min-height: 320px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Fichas decorativas */
+.fichas-decorativas {
+    position: absolute;
+    width: 110px;
+    height: auto;
+    bottom: -10px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.fichas-izquierda {
+    left: 0;
+}
+
+.fichas-derecha {
+    right: 0;
+}
+
+
+/* Títulos y puntajes */
+main section h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+main section small {
+    color: #f2d17b;
+    font-size: 26px;
+    font-weight: bold;
+}
+
 #computadora-cartas, #jugador-cartas {
     display: flex;
     min-height: 240px;
     padding-left: 12px;
     box-sizing: border-box;
     max-width: 100%;
+}
+
+
+/* Sección de estadísticas */
+#seccion-estadisticas {
+    background-color: #25442b;
+    border: 2px solid #577a54;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 30px;
+}
+
+#seccion-estadisticas h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Resumen de resultados */
+.resumen-estadisticas {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.resumen-estadisticas p {
+    background-color: #31563a;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+    margin: 0;
+}
+
+.resumen-estadisticas span {
+    display: block;
+    color: #f2d17b;
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+/* Historial desplegable */
+#historial-desplegable {
+    margin-top: 24px;
+}
+
+#historial-desplegable summary {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 12px;
+    border: 1px solid #577a54;
+    border-radius: 8px;
+}
+
+#historial-desplegable summary:hover {
+    background-color: #31563a;
 }
 
 /* Cartas */
@@ -54,6 +154,8 @@ html, body {
     }
 }
 
+
+
 @media (max-width: 768px) {
     #computadora-cartas, #jugador-cartas {
         min-height: 190px;
@@ -69,6 +171,20 @@ html, body {
 }
 
 @media (max-width: 576px) {
+    
+    .panel-juego {
+    min-height: 220px;
+    padding: 15px;
+    }   
+
+    main section h2 {
+        font-size: 19px;
+    }
+
+    main section small {
+        font-size: 21px;
+    }
+
     .titulo {
         font-size: 20px;
         padding: 15px;
