@@ -1,9 +1,11 @@
 html, body {
-    margin: 0px;
+    margin: 0;
     background-color: #2F4F30;
     color: white;
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
 }
-
 
 .titulo {
     text-align: center;
@@ -13,13 +15,79 @@ html, body {
     font-size: 25px;
 }
 
+
+#computadora-cartas, #jugador-cartas {
+    display: flex;
+    min-height: 240px;
+    padding-left: 12px;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+/* Cartas */
 .carta {
-    position: relative;
     width: 150px;
-    left: 100px;
+    max-width: 100%;
+    height: auto;
+    flex-shrink: 0;
+    animation: aparecer 0.25s ease-out;
+    transition: transform 0.2s;
+}
+
+/* Superposición */
+.carta:not(:first-child) {
     margin-left: -75px;
 }
 
-#computadora-cartas, #jugador-cartas {
-    height: 240px;
+.carta:hover {
+    transform: translateY(-10px);
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    #computadora-cartas, #jugador-cartas {
+        min-height: 190px;
+    }
+
+    .carta {
+        width: 120px;
+    }
+
+    .carta:not(:first-child) {
+        margin-left: -60px;
+    }
+}
+
+@media (max-width: 576px) {
+    .titulo {
+        font-size: 20px;
+        padding: 15px;
+    }
+
+    #computadora-cartas, #jugador-cartas {
+        min-height: 150px;
+        padding-left: 12px;
+    }
+
+    .carta {
+        width: 90px;
+    }
+
+    .carta:not(:first-child) {
+        margin-left: -45px;
+    }
+
+    .carta:hover {
+        transform: none;
+    }
 }

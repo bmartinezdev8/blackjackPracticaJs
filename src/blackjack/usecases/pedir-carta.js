@@ -6,13 +6,10 @@
  */
 export const pedirCarta = (deck) => {
 
-    if (!deck || deck.lenght === 0){
+    if (!Array.isArray (deck) || deck.length === 0){
         throw new Error ('No har cartas en el Deck')
     }
 
-    if ( deck.length === 0 ) {
-        throw 'No hay cartas en el deck';
-    }
     const carta = deck.pop();
     return carta;
 }

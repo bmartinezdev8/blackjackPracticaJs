@@ -1,6 +1,6 @@
 import { crearCartaHTML } from './crear-carta-html.js';
 import { pedirCarta } from './pedir-carta.js';
-import { valorCarta } from './valor-carta.js';
+import { calcularPuntos } from './calcular-puntos.js';
 import { determinarGanador } from './determinar-ganador.js';
 import { BLACKJACK } from './constantes.js';
 
@@ -17,19 +17,24 @@ export const turnoComputadora = ( puntosMinimos, puntosHTML, divCartasComputador
     if ( !puntosHTML ) throw new Error('Argumento puntosHTML es requerido');
 
     let puntosComputadora = 0;
+    let manoComputadora = [];
 
+    if (puntosMinimos > BLACKJACK) {
+    setTimeout(() => {
+        alert(determinarGanador(puntosMinimos, puntosComputadora));
+    }, 100);
+    return;
+    } 
+    
     do {
         const carta = pedirCarta( deck );
 
-        puntosComputadora = puntosComputadora + valorCarta( carta );
+        manoComputadora.push(carta);
+        puntosComputadora = calcularPuntos(manoComputadora);
         puntosHTML.innerText = puntosComputadora;
 
         const imgCarta = crearCartaHTML(carta);
         divCartasComputadora.append( imgCarta );
-
-        if ( puntosMinimos > BLACKJACK ) {
-            break;
-        }
 
     } while ( (puntosComputadora < puntosMinimos) && (puntosMinimos <= BLACKJACK) );
 

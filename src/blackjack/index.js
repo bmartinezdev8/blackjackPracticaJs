@@ -1,4 +1,4 @@
-import { crearDeck, pedirCarta, valorCarta, turnoComputadora, crearCartaHTML, BLACKJACK  } from './usecases/index.js';
+import { crearDeck, pedirCarta, turnoComputadora, crearCartaHTML, BLACKJACK, calcularPuntos  } from './usecases/index.js';
 
 
 /**
@@ -10,7 +10,7 @@ export const iniciarJuego = () => {
     const especiales = ['A','J','Q','K'];
     let deck = crearDeck( tipos, especiales );
 
-
+    let manoJugador = [];
     let puntosJugador = 0;
 
     // Referencias del HTML
@@ -35,7 +35,8 @@ export const iniciarJuego = () => {
 
         const carta = pedirCarta( deck );
         
-        puntosJugador = puntosJugador + valorCarta( carta );
+        manoJugador.push(carta);
+        puntosJugador = calcularPuntos(manoJugador);
         puntosJugadorHTML.innerText = puntosJugador;
         
         // <img class="carta" src="assets/cartas/2C.png">
@@ -61,6 +62,7 @@ export const iniciarJuego = () => {
         console.clear();
         deck = crearDeck(tipos,especiales);
 
+        manoJugador = [];
         puntosJugador     = 0;
         
         puntosJugadorHTML.innerText     = 0;
