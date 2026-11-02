@@ -4,6 +4,8 @@ import { calcularEstadisticas } from './calcular-estadisticas.js';
 export const mostrarEstadisticas = () => {
 
     const historial = obtenerHistorial();
+    const btnLimpiarHistorial = document.querySelector('#btnLimpiarHistorial');
+    btnLimpiarHistorial.disabled = historial.length === 0;
     const estadisticas = calcularEstadisticas(historial);
     const { total, victorias, derrotas, empates, winrate } = estadisticas;
 
@@ -15,6 +17,22 @@ export const mostrarEstadisticas = () => {
 
     const tablaHistorial = document.querySelector('#tabla-historial');
     tablaHistorial.innerHTML = '';
+
+        
+    if (historial.length === 0) {
+        const fila = document.createElement('tr');
+        const celda = document.createElement('td');
+
+        celda.colSpan = 4;
+        celda.textContent = 'Todavía no hay partidas registradas.';
+        celda.classList.add('text-center');
+
+        fila.append(celda);
+        tablaHistorial.append(fila);
+
+        return;
+    }
+
 
     [...historial].reverse().forEach((partida) => {
 
