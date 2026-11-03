@@ -36,6 +36,7 @@ La computadora solicita cartas hasta alcanzar o superar la puntuación del jugad
 - Historial desplegable con los resultados de cada partida.
 - Opción para borrar el historial mediante una confirmación.
 - Validación de datos almacenados para controlar historiales corruptos o registros inválidos.
+- Precarga de imagenes: implementación de una función asíncrona que carga anticipadamente las 52 cartas del mazo, permitiendo que el navegador reutilice las imágenes y reduciendo los tiempos de espera durante las partidas.
 
 ## Tecnologías
 
