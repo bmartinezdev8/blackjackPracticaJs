@@ -1,4 +1,4 @@
-import { crearDeck, pedirCarta, turnoComputadora, crearCartaHTML, BLACKJACK, calcularPuntos, mostrarEstadisticas, limpiarHistorial  } from './usecases/index.js';
+import { crearDeck, pedirCarta, turnoComputadora, crearCartaHTML, BLACKJACK, calcularPuntos, mostrarEstadisticas, limpiarHistorial, precargarCartas  } from './usecases/index.js';
 
 
 /**
@@ -9,6 +9,8 @@ export const iniciarJuego = () => {
     const tipos      = ['C','D','H','S'];
     const especiales = ['A','J','Q','K'];
     let deck = crearDeck( tipos, especiales );
+
+    precargarCartas(deck);
 
     let manoJugador = [];
     let puntosJugador = 0;
